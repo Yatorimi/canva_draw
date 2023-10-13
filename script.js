@@ -1,41 +1,36 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+const table = document.getElementById('table');
 const resetButton = document.getElementById('resetButton');
+let isDrawing = false;
 
-let drawing = false;
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-ctx.lineWidth = 5;
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.strokeStyle = 'black';
-
-function startPosition(e) {
-    drawing = true;
-    draw(e);
+function createTable(rows, columns) {
+    for (let i = 0; i < rows; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < columns; j++) {
+            const cell = document.createElement('td');
+            cell.addEventListener('mousemove', handleCellHover);
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
 }
 
-function endPosition() {
-    drawing = false;
-    ctx.beginPath();
-}
-
-function draw(e) {
-    if (!drawing) return;
-
-    ctx.lineTo(e.clientX, e.clientY);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(e.clientX, e.clientY);
+function handleCellHover(e) {
+    if (isDrawing) {
+        e.target.style.backgroundColor = 'black';
+    }
 }
 
 resetButton.addEventListener('click', function () {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => cell.style.backgroundColor = 'white');
 });
 
-canvas.addEventListener('mousedown', startPosition);
-canvas.addEventListener('mouseup', endPosition);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseleave', endPosition);
+table.addEventListener('mousedown', () => {
+    isDrawing = true;
+});
+
+table.addEventListener('mouseup', () => {
+    isDrawing = false;
+});
+
+createTable(50, 50); // cases du tableau
