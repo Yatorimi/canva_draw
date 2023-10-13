@@ -3,10 +3,12 @@ const resetButton = document.getElementById('resetButton');
 const eraseButton = document.getElementById('eraseButton');
 const saveButton = document.getElementById('saveButton');
 const createTableButton = document.getElementById('createTableButton');
+const drawCircleButton = document.getElementById('drawCircleButton');
 const rowsInput = document.getElementById('rows');
 const columnsInput = document.getElementById('columns');
 let isDrawing = false;
 let eraseMode = false;
+let drawCircleMode = false;
 
 createTableButton.addEventListener('click', function () {
     const rows = parseInt(rowsInput.value, 10);
@@ -32,8 +34,12 @@ function handleCellHover(e) {
     if (isDrawing) {
         if (eraseMode) {
             e.target.style.backgroundColor = 'white';
+        } else if (drawCircleMode) {
+            e.target.style.backgroundColor = 'black';
+            e.target.style.borderRadius = '50%';
         } else {
             e.target.style.backgroundColor = 'black';
+            e.target.style.borderRadius = '0';
         }
     }
 }
@@ -41,6 +47,12 @@ function handleCellHover(e) {
 function handleCellClick(e) {
     if (eraseMode) {
         e.target.style.backgroundColor = 'white';
+    } else if (drawCircleMode) {
+        e.target.style.backgroundColor = 'black';
+        e.target.style.borderRadius = '50%';
+    } else {
+        e.target.style.backgroundColor = 'black';
+        e.target.style.borderRadius = '0';
     }
 }
 
@@ -56,6 +68,19 @@ eraseButton.addEventListener('click', () => {
     } else {
         eraseButton.innerText = 'Prendre la gomme';
     }
+    drawCircleMode = false;
+    drawCircleButton.innerText = 'Dessiner un cercle';
+});
+
+drawCircleButton.addEventListener('click', () => {
+    drawCircleMode = !drawCircleMode;
+    if (drawCircleMode) {
+        drawCircleButton.innerText = 'Dessiner un cercle (actif)';
+    } else {
+        drawCircleButton.innerText = 'Dessiner un cercle';
+    }
+    eraseMode = false;
+    eraseButton.innerText = 'Prendre la gomme';
 });
 
 saveButton.addEventListener('click', function () {
@@ -63,7 +88,7 @@ saveButton.addEventListener('click', function () {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const svgNS = svg.namespaceURI;
 
-    svg.setAttribute('width', '800'); 
+    svg.setAttribute('width', '800');
     svg.setAttribute('height', '800');
 
     blackCells.forEach(cell => {
@@ -93,37 +118,8 @@ table.addEventListener('mouseup', () => {
     isDrawing = false;
 });
 
-//tableau fix
 function clearTable() {
     while (table.firstChild) {
         table.removeChild(table.firstChild);
-    }
-}
-
-
-
-//cercle
-const drawCircleButton = document.getElementById('drawCircleButton');
-let drawCircleMode = false;
-
-drawCircleButton.addEventListener('click', function () {
-    drawCircleMode = !drawCircleMode;
-    if (drawCircleMode) {
-        drawCircleButton.innerText = 'Dessiner un cercle (actif)';
-    } else {
-        drawCircleButton.innerText = 'Dessiner un cercle';
-    }
-});
-
-function handleCellClick(e) {
-    if (eraseMode) {
-        e.target.style.backgroundColor = 'white';
-    } else if (drawCircleMode) {
-        // Dessiner un cercle en remplissant la cellule en noir
-        e.target.style.backgroundColor = 'black';
-        e.target.style.borderRadius = '50%';
-    } else {
-        e.target.style.backgroundColor = 'black';
-        e.target.style.borderRadius = '0';
     }
 }
