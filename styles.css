@@ -1,3 +1,10 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Gabarito', sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -14,24 +21,60 @@ body, html {
     align-items: center;
 }
 
+.input-container {
+    margin-bottom: 20px;
+}
+
 .buttons-container {
     display: flex;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    align-content: center;
+
+}
+
+/* Styles pour les boutons d'outils (gomme et cercle) */
+.buttons-container button.tool-button {
+    background-color:#c1c1c1; /* Nuance de gris pour les boutons d'outils */
+    border: none;
+    border-radius: 5px;
+    width: 160px;
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.buttons-container button.tool-button:hover {
+    background-color: #cccccc;
+}
+
+
+/* Styles pour les boutons d'actions (Réinitialiser, Sauvegarder, Créer le tableau) */
+.buttons-container button.action-button {
+    background-color: #888; /* Nuance de gris pour les boutons d'actions */
+    border: none;
+    border-radius: 5px;
+    color: #fff; /* Texte en blanc */
+    width: 120px;
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.buttons-container button.action-button:hover {
+    background-color: red;
+}
+#saveButton:hover {
+    background-color: blue;
 }
 
 table {
     border-collapse: collapse;
+    border: 5px solid #000000; /* Bordure légère pour le tableau */
 }
 
 td {
     width: 40px;
     height: 40px;
-    border: 0.5px solid #000;
+    border: 1px solid #000;
     background-color: white;
-}
-
-button {
-    width: 100px;
-    height: 40px;
-    margin-right: 10px;
 }
