@@ -2,8 +2,18 @@ const table = document.getElementById('table');
 const resetButton = document.getElementById('resetButton');
 const eraseButton = document.getElementById('eraseButton');
 const saveButton = document.getElementById('saveButton');
+const createTableButton = document.getElementById('createTableButton');
+const rowsInput = document.getElementById('rows');
+const columnsInput = document.getElementById('columns');
 let isDrawing = false;
 let eraseMode = false;
+
+createTableButton.addEventListener('click', function () {
+    const rows = parseInt(rowsInput.value, 10);
+    const columns = parseInt(columnsInput.value, 10);
+    clearTable();
+    createTable(rows, columns);
+});
 
 function createTable(rows, columns) {
     for (let i = 0; i < rows; i++) {
@@ -37,8 +47,6 @@ function handleCellClick(e) {
 resetButton.addEventListener('click', function () {
     const cells = document.querySelectorAll('td');
     cells.forEach(cell => cell.style.backgroundColor = 'white');
-    eraseMode = false;
-    eraseButton.innerText = 'Prendre la gomme';
 });
 
 eraseButton.addEventListener('click', () => {
@@ -85,4 +93,37 @@ table.addEventListener('mouseup', () => {
     isDrawing = false;
 });
 
-createTable(20, 20);
+//tableau fix
+function clearTable() {
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+}
+
+
+
+//cercle
+const drawCircleButton = document.getElementById('drawCircleButton');
+let drawCircleMode = false;
+
+drawCircleButton.addEventListener('click', function () {
+    drawCircleMode = !drawCircleMode;
+    if (drawCircleMode) {
+        drawCircleButton.innerText = 'Dessiner un cercle (actif)';
+    } else {
+        drawCircleButton.innerText = 'Dessiner un cercle';
+    }
+});
+
+function handleCellClick(e) {
+    if (eraseMode) {
+        e.target.style.backgroundColor = 'white';
+    } else if (drawCircleMode) {
+        // Dessiner un cercle en remplissant la cellule en noir
+        e.target.style.backgroundColor = 'black';
+        e.target.style.borderRadius = '50%';
+    } else {
+        e.target.style.backgroundColor = 'black';
+        e.target.style.borderRadius = '0';
+    }
+}
