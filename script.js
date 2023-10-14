@@ -78,16 +78,21 @@ function saveDrawing() {
         const svgElement = document.createElementNS(svgNS, shape);
         svgElement.setAttribute('fill', 'black');
         if (shape === 'circle') {
+            const svgElement = document.createElementNS(svgNS, 'circle');
             svgElement.setAttribute('cx', cell.cellIndex * 40 + 20);
             svgElement.setAttribute('cy', cell.parentElement.rowIndex * 40 + 20);
             svgElement.setAttribute('r', '20');
+            svgElement.setAttribute('fill', 'black');
+            svg.appendChild(svgElement);
         } else {
+            const svgElement = document.createElementNS(svgNS, 'rect');
             svgElement.setAttribute('x', cell.cellIndex * 40);
             svgElement.setAttribute('y', cell.parentElement.rowIndex * 40);
             svgElement.setAttribute('width', '40');
             svgElement.setAttribute('height', '40');
+            svgElement.setAttribute('fill', 'black');
+            svg.appendChild(svgElement);
         }
-        svg.appendChild(svgElement);
     });
     const svgBlob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(svgBlob);
