@@ -36,7 +36,7 @@ body, html {
 
 /* Styles pour les boutons d'outils (gomme et cercle) */
 .buttons-container button.tool-button {
-    background-color:#c1c1c1; /* Nuance de gris pour les boutons d'outils */
+    background-color:#c1c1c1; 
     border: none;
     border-radius: 5px;
     width: 160px;
@@ -49,12 +49,12 @@ body, html {
 }
 
 
-/* Styles pour les boutons d'actions (Réinitialiser, Sauvegarder, Créer le tableau) */
+
 .buttons-container button.action-button {
-    background-color: #888; /* Nuance de gris pour les boutons d'actions */
+    background-color: #888; 
     border: none;
     border-radius: 5px;
-    color: #fff; /* Texte en blanc */
+    color: #fff; 
     width: 120px;
     height: 40px;
     margin-right: 10px;
@@ -69,7 +69,7 @@ body, html {
 
 table {
     border-collapse: collapse;
-    border: 5px solid #000000; /* Bordure légère pour le tableau */
+    border: 5px solid #000000; 
 }
 
 td {
@@ -77,4 +77,42 @@ td {
     height: 40px;
     border: 1px solid #000;
     background-color: white;
+}
+
+
+
+
+
+input[type="file"] {
+    display: none; 
+}
+
+.buttons-container label {
+    background-color: #888;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons-container label:hover {
+    background-color: #555;
+}
+
+#imageInput {
+    display: none;
+}
+
+#imageLabel {
+    background-color: #888;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#imageLabel:hover {
+    background-color: #555;
 }
